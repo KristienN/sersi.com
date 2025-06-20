@@ -1,20 +1,20 @@
 <template>
-  <div class="flex justify-center gap-12">
+  <div class="flex flex-col md:grid md:grid-cols-2 lg:flex lg:flex-row items-center justify-center gap-12 md:my-32">
     <UCard
       v-for="plan in plans"
       :key="plan.id"
-      class="flex flex-col justify-between w-96 shadow-lg"
+      class="flex flex-col justify-between w-86 shadow-lg"
     >
       <template #header>
         <p
-          class="flex text-2xl font-bold items-center justify-center"
+          class="flex text-xl md:text-2xl font-bold items-center justify-center"
           :class="plan.name_color"
         >
           <UIcon :name="plan.icon" class="" /><code>{{ plan.name }}</code>
         </p>
       </template>
       <div class="flex flex-col h-[32vh]">
-        <p class="text-gray-500 text-center">
+        <p class="text-gray-500 text-center dark:text-white">
           {{ plan.description }}
         </p>
 
@@ -39,11 +39,11 @@
         </div>
 
         <div class="flex flex-col items-center mt-6">
-          <ul class="text-sm">
+          <ul>
             <li
               v-for="feature in plan.featureList"
               :key="feature"
-              class="flex gap-2 items-center text-gray-500"
+              class="flex gap-2 items-center text-gray-500 dark:text-white text-xs md:text-sm"
             >
               <UIcon name="i-gg-check-o" class="text-primary" />
               <p>{{ feature }}</p>

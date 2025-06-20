@@ -1,13 +1,15 @@
 <template>
-  <div class="flex flex-col justify-center items-center my-10 gap-8">
-    <p class="text-center text-4xl font-bold">Join the community!</p>
-    <p class="text-center text-xl w-2/3">
+  <div class="flex justify-center items-center">
+  <div class="flex flex-col justify-center items-center my-10 gap-8 md:text-center md:w-2/3">
+    <p class="text-4xl font-bold">Join the community!</p>
+    <p class="text-xl">
       We value your feedback and contributions. Join our community to get help,
       share your projects, and stay updated with the latest news
     </p>
   </div>
+  </div>
   <div
-    class="flex flex-col justify-center items-center xl:grid xl:grid-flow-row xl:grid-rows-2 xl:grid-cols-3 xl:gap-12"
+    class="flex flex-col md:flex-row xl:flex-col  justify-center items-center xl:grid xl:grid-flow-row xl:grid-rows-2 xl:grid-cols-3 xl:gap-12"
   >
     <UCard
       v-for="community in communities"
@@ -20,7 +22,7 @@
           :class="`size-18 ${community.color} mb-6`"
         />
         <p class="text-xl font-bold">{{ community.name }}</p>
-        <p class="text-sm text-center">{{ community.description }}</p>
+        <p class="text-sm text-center md:hidden xl:block">{{ community.description }}</p>
       </div>
     </UCard>
   </div>

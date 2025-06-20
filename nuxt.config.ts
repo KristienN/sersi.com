@@ -13,8 +13,10 @@ export default defineNuxtConfig({
   css: ['~/assets/css/styles.css'],
   colorMode: {
     preference: 'system',
-    fallback: 'dark',
+    fallback: 'light',
     classSuffix: '',
+    storage: 'localStorage',
+    storageKey: 'sersi-color-mode', 
   },
   content: {
     build: {
@@ -51,19 +53,5 @@ export default defineNuxtConfig({
       supabaseUrl: process.env.SUPABASE_URL,
       supabaseAnonKey: process.env.SUPABASE_ANON_KEY
     }
-  },
-  tailwindcss:{
-    themes:{
-      extend:{
-        fontFamily:{
-          sans:['Atkinson Hyperlegible', 'sans-serif'],
-        }
-      }
-    }
-  },
-  ui: {
-    theme: {
-      colors: ['primary', 'accent', 'error', 'warning', 'success'],
-    },
   },
 });

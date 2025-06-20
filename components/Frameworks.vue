@@ -1,22 +1,24 @@
 <template>
-  <div class="flex flex-col justify-center items-center my-10 py-12 gap-8">
-    <p class="text-center text-4xl font-bold w-2/3">
+  <div class="flex justify-center items-center">
+  <div class="flex flex-col justify-center items-center my-10 py-12 gap-8 md:text-center md:w-2/3">
+    <p class="text-4xl font-bold">
       Supporting the most popular frameworks and libraries
     </p>
-    <p class="text-center text-xl w-2/3">
+    <p class="text-xl">
       All frameworks are powered by vite, and are ready to use with your
       favourite libraries
     </p>
   </div>
+  </div>
   <div class="flex justify-center items-center">
   <div
-    class="grid grid-flow-row-dense grid-cols-5 place-content-center gap-8 w-2/3 mb-36"
+    class="grid grid-flow-row-dense grid-cols-3 md:grid-cols-4 lg:grid-cols-5 place-content-center gap-8 lg:w-2/3 mb-36"
   >
     <motion.div
       v-for="framework in frameworks"
       :key="framework.name"
       :class="`size-24 flex  items-center justify-center border border-gray-300 rounded-lg inset-shadow-sm ${framework.color}`"
-      :whileHover="{scale: 0.8, rotate: 10,color: 'black', outline: '10px double ' + framework.hoverColor, outlineOffset: '2px', boxShadow: '0 0 0 2px ' + framework.color }"
+      :whileHover="{scale: 0.8, rotate: 10, color: `${mode.value === 'dark' ? 'white' : 'black'}` , outline: '10px double ' + framework.hoverColor, outlineOffset: '2px', boxShadow: '0 0 0 2px ' + framework.color }"
     >
     <NuxtLink :to="framework.link">
       <UIcon :name="framework.icon" :class="`size-16`" />
@@ -29,6 +31,13 @@
 <script lang="ts" setup>
 import type { Framework } from '~/types';
 import { motion } from 'motion-v';
+
+const mode = useColorMode();
+
+const hoverColor = ref('black');
+const darkmodeHoverColor = computed(() => {
+  hoverColor.value = mode.value === 'dark' ? 'white' : 'black';
+});
 
 const frameworks: Framework[] = [
   {
@@ -84,8 +93,8 @@ const frameworks: Framework[] = [
     name: 'Express',
     icon: 'i-simple-icons-express',
     link: 'https://expressjs.com',
-    color: 'text-black',
-    hoverColor: 'black',
+    color: 'text-black dark:text-white',
+    hoverColor: `${darkmodeHoverColor.value}`,
   },
   {
     name: 'MongoDB',
@@ -112,8 +121,8 @@ const frameworks: Framework[] = [
     name: 'GitHub',
     icon: 'i-simple-icons-github',
     link: 'https://github.com',
-    color: 'text-black',
-    hoverColor: 'black',
+    color: 'text-black dark:text-white',
+    hoverColor: `${darkmodeHoverColor.value}`,
   },
   {
     name: 'GitLab',
@@ -133,8 +142,8 @@ const frameworks: Framework[] = [
     name: 'Prisma',
     icon: 'i-simple-icons-prisma',
     link: 'https://prisma.io',
-    color: 'text-black',
-    hoverColor: 'black',
+    color: 'text-black dark:text-white',
+    hoverColor: `${darkmodeHoverColor.value}`,
   },
   {
     name: 'Prometheus',
@@ -168,8 +177,8 @@ const frameworks: Framework[] = [
     name: 'Fastify',
     icon: 'i-simple-icons-fastify',
     link: 'https://fastify.io',
-    color: 'text-black',
-    hoverColor: 'black',
+    color: 'text-black dark:text-white',
+    hoverColor: `${darkmodeHoverColor.value}`,
   },
 ];
 </script>
