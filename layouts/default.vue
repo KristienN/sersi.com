@@ -1,11 +1,13 @@
 <template>
-  <div class=" px-5 md:px-12 2xl:px-48 max-w-full">
-    <ColorScheme placeholder="" tag="div" >
-    <NavBar />
-    <slot />
-    </ColorScheme>
-    </div>
+  <div
+    class="font-display overflow-x-hidden overflow-y-hidden bg-white dark:bg-slate-950"
+  >
+    <AppHeader />
+    <TerminalMain>
+      <slot />
+    </TerminalMain>
+    <AppFooter />
+  </div>
 </template>
 
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>

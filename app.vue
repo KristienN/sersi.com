@@ -1,18 +1,9 @@
 <template>
-  <MotionConfig
-    :transition="{
-      duration: 0.3,
-      ease: 'easeInOut',
-    }"
-  >
-    <NuxtLayout>
-      <UApp>
-        <NuxtPage />
-      </UApp>
-    </NuxtLayout>
-  </MotionConfig>
+  <NuxtLayout>
+    <UApp>
+      <NuxtPage />
+    </UApp>
+  </NuxtLayout>
 </template>
 
-<script lang="ts" setup>
-import { MotionConfig } from 'motion-v';
-</script>
+<script lang="ts" setup></script>

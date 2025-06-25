@@ -1,32 +1,31 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
+import { defineNuxtConfig } from 'nuxt/config';
+
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
   modules: [
-    '@nuxt/ui',
     '@nuxtjs/color-mode',
     '@nuxt/content',
     '@nuxtjs/tailwindcss',
-    '@nuxt/fonts',
     '@nuxtjs/seo',
+    '@nuxt/icon',
+    '@nuxt/fonts',
+    '@nuxt/ui',
   ],
   css: ['~/assets/css/styles.css'],
   colorMode: {
     preference: 'system',
-    fallback: 'light',
+    fallback: 'dark',
     classSuffix: '',
-    storage: 'localStorage',
-    storageKey: 'sersi-color-mode', 
   },
   content: {
     build: {
       markdown: {
         highlight: {
+          langs: ['bash', 'yaml'],
           theme: {
-            dark: 'github-dark',
-            light: 'github-light',
-            default: 'github-light',
-            sepia: 'monokai',
+            default: 'github-dark',
           },
         },
         toc: {
@@ -35,23 +34,19 @@ export default defineNuxtConfig({
       },
     },
   },
-  fonts:{
-    defaults:{
-      preload:true,
-      styles:['normal', 'italic'],
-    },
-    families:[
+  fonts: {
+    families: [
       {
-        name:'Atkinson Hyperlegible',
-        provider:'bunny',
-        styles:['normal', 'italic'],
-      }
-    ]
+        name: 'Ubuntu Mono Sans',
+        provider: 'google',
+        fallbacks: ['sans-serif'],
+      },
+    ],
   },
   runtimeConfig: {
     public: {
       supabaseUrl: process.env.SUPABASE_URL,
-      supabaseAnonKey: process.env.SUPABASE_ANON_KEY
-    }
+      supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
+    },
   },
 });

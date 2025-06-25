@@ -1,41 +1,83 @@
 <template>
-  <div class="px-64">
-    <NavBar />
-    <div class="flex flex-row space-x-12">
-      <DocNavBar />
-      <div class="flex flex-col gap-4 prose prose-2xl max-w-4xl">
-        <UBreadcrumb :items="items">
-          <template #separator>
-            <UIcon name="i-lucide-chevron-right" size="16" class="mx-2 text-muted" />
-          </template>
-        </UBreadcrumb>
-        <slot />
+  <div class="font-display overflow-x-hidden dark:bg-slate-950">
+    <AppHeader />
+    <TerminalMain>
+      <div
+        class="flex flex-col lg:flex-row items-center lg:items-start justify-center"
+      >
+        <DocsSidebar>
+          <button
+            :class="
+              showNav
+                ? 'lg:hidden flex items-center justify-center mb-9'
+                : 'lg:hidden flex items-center justify-center border-2 border-white p-1'
+            "
+            @click="showNav = !showNav"
+          >
+            <UIcon
+              v-if="showNav"
+              name="ic:round-close"
+              size="36"
+              class="text-white"
+            />
+            <UIcon
+              v-else
+              name="ic:round-menu-book"
+              size="36"
+              class="text-white"
+            />
+          </button>
+        </DocsSidebar>
+        <div class="flex flex-col lg:flex-row w-full px-10">
+          <div
+            class="bg-white/50 w-full h-full space-y-10 px-10 py-5 lg:hidden"
+            :class="{ 'hidden lg:block': !showNav }"
+          >
+            <NuxtLink
+              v-for="item in navitems"
+              :key="item.id"
+              :to="item.path"
+              class="w-full flex"
+            >
+              <p class="text-title text-white">{{ item.name }}</p>
+              <UIcon name="ic:round-arrow-right" size="24" class="text-white" />
+            </NuxtLink>
+          </div>
+          <slot />
+        </div>
       </div>
-    </div>
+    </TerminalMain>
+    <AppFooter />
   </div>
 </template>
 
 <script lang="ts" setup>
-import type { BreadcrumbItem } from '@nuxt/ui';
-import { onMounted } from 'vue';
-
-const route = useRoute();
-
-const items = ref<BreadcrumbItem[]>([
-    {
-      label: 'Getting Started',
-      to: '/docs',
-    },
-  ]);
-
-watch(() => route.path, () => {
-
-if (items.value.length > 1) {
-    items.value.pop();
-} 
-items.value.push({
-    label: route.path.split('/').pop()!,
-    to: route.path,
-});
-});
+const showNav = ref(false);
+const navitems = ref([
+  {
+    id: 1,
+    name: 'Getting Started',
+    path: '/docs',
+  },
+  {
+    id: 2,
+    name: 'Installation',
+    path: '/docs/installation',
+  },
+  {
+    id: 3,
+    name: 'Configuration',
+    path: '/docs/configuration',
+  },
+  {
+    id: 4,
+    name: 'Usage',
+    path: '/docs/usage',
+  },
+  {
+    id: 5,
+    name: 'Pro',
+    path: '/docs/pro',
+  },
+]);
 </script>

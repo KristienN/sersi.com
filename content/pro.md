@@ -10,48 +10,67 @@ layout: docs
 
 ## What's Included
 
-- 🔒 Private templates and full-stack scaffolds
-- 🔧 Boilerplate-as-a-Service (BaaS) via YAML config
-- 🧱 CI/CD, Docker
-- 🔑 License-based usage & API token access
+- Scaffold Store
+- Custom Pre & Post Hooks
+- Shared private templates (Teams)
 
 ## Get Access
 
-1. Purchase a license at [sersi.dev/pro](https://sersi.dev/pro)
-2. Receive an API token and Pro CLI access
-3. Authenticate via:
+1. Subscribe to Pro or Teams at [sersi.dev/pro](https://sersi.dev/pro)
+2. Authenticate via:
+
+::docs-code-block
 
 ```bash
-sersi-pro init --token=YOUR_API_TOKEN
+sersi auth login
 ```
+
+::
+
+4. Check status
+
+::docs-code-block
+
+```bash
+sersi auth status
+```
+
+::
 
 ## Installation
 
-You'll receive installation instructions after purchase. We support:
-
-- npm
-- npx
-- via binary download
+See [Installation Docs](installation.md)
 
 ## License Terms
 
-Sersi Pro is commercial software licensed per user.
-See full [License Terms](https://sersi.dev/pro/license).
+Sersi Pro feaures are under commercial software license per user.
+See full - LICENSE-COMMERCIAL.
 
-## Usage
+# Usage
+
+## Commands
+
+1. scaffold
+
+To do an action eg. `save` a scaffold file to the scaffold store
+
+eg.
+
+::docs-code-block
 
 ```bash
-sersi-pro init --token=YOUR_API_TOKEN
-sersi-pro build -f path/to/config.yaml
-sersi-pro create <flags>
+sersi scaffold --action=<action> --file-path <path> or --name=<name>
+
+# example
+sersi scaffold --action=save --file-path path/to/sersi.yaml
 ```
 
-## Features
+::
 
-- 🔒 Gain access to full-stack scaffolds
-- 🔒 Store regularly used templates in Scaffold Store and access public templates
-- 🔧 Boilerplate-as-a-Service (BaaS) via YAML config
-- 🧱 CI/CD, Docker
-- 🔑 License-based usage & API token access
+## Actions:
 
-see [USAGE.md](USAGE.md) for more details
+- save -> saves a file to the scaffold store [use with --file-path]
+- update -> update a file in the scaffold store with a file [use with --file-path]
+- list -> list scaffolds in store (and select to generate)
+- delete -> delete a scaffold from store [use with --name]
+- use -> use a scaffold from store to generate scaffold [use with --name]

@@ -1,8 +1,6 @@
 <template>
-  <div class="prose mx-auto p-4">
-    <ContentRenderer class="prose w-[60vw]" v-if="page" :value="page" />
-    <div v-else>No page found</div>
-  </div>
+  <ContentRenderer class="prose min-w-64" v-if="page" :value="page" />
+  <div v-else>No docs found</div>
 </template>
 
 <script setup lang="ts">
@@ -11,9 +9,14 @@ const { data: page } = await useAsyncData(`${slug}`, () => {
   return queryCollection('content').path(`/${slug}`).first();
 });
 
-useSeoMeta({
+useHead({
   title: page.value?.title,
-  description: page.value?.description,
+  meta: [
+    {
+      name: 'description',
+      content: page.value?.description,
+    },
+  ],
 });
 
 definePageMeta({

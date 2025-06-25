@@ -1,21 +1,23 @@
 <template>
-  <div>
-    <ContentRenderer class="prose" v-if="docs" :value="docs" />
-    <div v-else>No docs found</div>
-  </div>
+  <ContentRenderer class="prose min-w-64" v-if="docs" :value="docs" />
+  <div v-else>No docs found</div>
 </template>
 
 <script lang="ts" setup>
+definePageMeta({
+  layout: 'docs',
+});
 const { data: docs } = await useAsyncData('docs', () =>
   queryCollection('content').path('/').first()
 );
 
-useSeoMeta({
+useHead({
   title: docs.value?.title,
-  description: docs.value?.description,
-});
-
-definePageMeta({
-  layout: 'docs',
+  meta: [
+    {
+      name: 'description',
+      content: docs.value?.description,
+    },
+  ],
 });
 </script>

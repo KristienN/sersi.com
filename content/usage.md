@@ -8,17 +8,63 @@ layout: docs
 
 ## 🚀 Commands
 
-### create
+1. create
+   Generate a new full stack project with optional flags for customization.
 
-Generate a new project with optional flags for customization.
+::docs-code-block
 
 ```bash
-sersi create [flags]
+sersi create
 ```
 
-Alternatively, you can use flags to do everything in one go.
+::
 
-Available Flags:
+this generates a wizard to create a full stack application. If you would like to create either a frontend or just a backend, use the subcommands below.
+
+### subcommands:
+
+- backend
+  Scaffold a backend project with optional flags for customization.
+
+::docs-code-block
+
+```bash
+sersi create backend [flags]
+```
+
+::
+
+Available Flags for `backend`:
+
+| Flag        | Type   | Description                              | Optional |
+| ----------- | ------ | ---------------------------------------- | -------- |
+| --name      | string | Name of the project                      | Yes      |
+| --lang      | string | Language to use (ts, nodejs, go, python) | Yes      |
+| --framework | string | Framework to use (fastapi, express, gin) | Yes      |
+| --database  | string | Database to use (postgres, mongodb)      | Yes      |
+
+Example:
+
+::docs-code-block
+
+```bash
+sersi create backend --name my-backend --framework fastapi --database postgresql --lang py
+```
+
+::
+
+- frontend
+  Scaffold a frontend project with optional flags for customization.
+
+::docs-code-block
+
+```bash
+sersi create frontend [flags]
+```
+
+::
+
+Available Flags for `frontend`:
 
 | Flag        | Type   | Description                                    | Optional |
 | ----------- | ------ | ---------------------------------------------- | -------- |
@@ -29,39 +75,52 @@ Available Flags:
 
 Example:
 
+::docs-code-block
+
 ```bash
-sersi create --name my-site --framework vue --css bootstrap --lang js
+sersi create frontend --name my-site --framework vue --css bootstrap --lang js
 ```
 
-### build
+::
 
-Build a project from a YAML configuration file.
+2. build
+   Build a project from a YAML configuration file.
+
+::docs-code-block
 
 ```bash
 sersi build -f path/to/sersi.yaml
 ```
 
+::
+
 | Flag | Required | Description                  |
 | ---- | -------- | ---------------------------- |
 | -f   | ✅       | Path to the YAML config file |
 
-🧪 Example sersi.yaml
+### Example sersi.yaml
+
+::docs-code-block
 
 ```yaml
 name: sersi-app
+structure: polyrepos
 scaffold:
   frontend:
     framework: react
-  css: tailwind
-  language: typescript
-  opts:
-    - material-ui
-    - prettier
+    css: tailwind
+    language: typescript
+  backend:
+    language: go
+    framework: gin
+    database: postgresql
 ```
 
-## 📄 YAML Reference
+::
 
-These are the currently supported values for each field in `sersi.yaml`:
+## YAML Reference
+
+These are the currently supported values for each flag & field in `sersi.yaml`:
 
 ### `frontend`
 
@@ -83,17 +142,6 @@ These are the currently supported values for each field in `sersi.yaml`:
 - `typescript` or `ts`
 - `javascript` or `js`
 
-#### `opts`
-
-A list of additional tooling or UI frameworks. Supported:
-
-- `material-ui`
-- `prettier`
-
-## 🔐 Extended YAML Options [Sersi Pro](https://sersi.dev/pro)
-
-In addition to standard fields, Sersi Pro supports:
-
 ### `backend`
 
 #### `language`
@@ -101,48 +149,43 @@ In addition to standard fields, Sersi Pro supports:
 - `typescript` or `ts`
 - `javascript` or `js`
 - `go`
+- `python`
 
 #### `framework`
 
-- `deno`
 - `express`
 - `gin` (Go)
+- `chi` (Go)
+- `fastapi` (Python)
 
 #### `database`
 
-- `postgres`
-- `sqlite`
-- `mongodb`
-
-### `devops`
-
-#### `docker`
-
-- `true` or `false`
-
-#### `cicd`
-
-- `github-actions`
-- `gitlab`
-
-#### `monitoring`
-
-- `prometheus`
+- `postgres` (coming soon)
+- `mongodb` (coming soon)
+- `none`
 
 3. version
    Show the version of the CLI.
+
+::docs-code-block
 
 ```bash
 sersi version
 ```
 
+::
+
 4. help
    Display help information for any command.
+
+::docs-code-block
 
 ```bash
 sersi help
 sersi help create
 ```
+
+::
 
 ## 🗒 Notes
 
