@@ -1,6 +1,6 @@
 ---
-title: Sersi CLI Usage Docs
-description: Learn how to use Sersi CLI.
+title: Usage
+description: Learn how to use Sersi CLI to scaffold your projects.
 layout: docs
 ---
 

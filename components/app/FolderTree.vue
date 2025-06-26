@@ -1,5 +1,8 @@
 <template>
-  <UTree :items="treeData" size="lg" />
+  <UTree
+    :items="treeData"
+    size="lg"
+  />
 </template>
 
 <script lang="ts" setup>

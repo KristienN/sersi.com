@@ -1,18 +1,30 @@
 <template>
-  <div class="flex flex-col items-center gap-2 min-w-full" v-if="submitted">
-    <UIcon name="i-lets-icons-check-fill" class="size-16 text-primary" />
-    <p class="text-2xl font-bold">Thank you for joining the waitlist</p>
-    <p class="text-gray-500">Stay tuned for updates on our various platforms</p>
+  <div
+    v-if="submitted"
+    class="flex flex-col items-center gap-2 min-w-full"
+  >
+    <UIcon
+      name="i-lets-icons-check-fill"
+      class="size-16 text-primary"
+    />
+    <p class="text-2xl font-bold">
+      Thank you for joining the waitlist
+    </p>
+    <p class="text-gray-500">
+      Stay tuned for updates on our various platforms
+    </p>
   </div>
-  <p class="text-xl" v-else>Join waiting list</p>
   <UForm
+    v-if="!submitted"
     :schema="schema"
     :state="state"
-    @submit="onSubmit"
     class="flex flex-col gap-8 text-xl min-w-full"
-    v-else
+    @submit="onSubmit"
   >
-    <UFormField label="Name" required>
+    <UFormField
+      label="Name"
+      required
+    >
       <UInput
         v-model="state.name"
         type="text"
@@ -20,10 +32,13 @@
         trailing-icon="i-lucide-user"
         placeholder="Enter your name"
         size="xl"
-        class="min-w-full"
+        class="min-w-full text-white"
       />
     </UFormField>
-    <UFormField label="Email" required>
+    <UFormField
+      label="Email"
+      required
+    >
       <UInput
         v-model="state.email"
         type="email"
@@ -34,7 +49,10 @@
         class="min-w-full"
       />
     </UFormField>
-    <UFormField label="What best describes you." required>
+    <UFormField
+      label="What best describes you."
+      required
+    >
       <UInputMenu
         v-model="state.role"
         :items="roles"
@@ -49,8 +67,9 @@
       :ui="{
         base: 'cursor-pointer',
       }"
-      >Join Waitlist</UButton
     >
+      Join Waitlist
+    </UButton>
   </UForm>
 </template>
 
@@ -66,7 +85,7 @@ const { $supabase } = useNuxtApp();
 const schema = v.object({
   name: v.pipe(
     v.string(),
-    v.minLength(2, 'Name must be at least 2 characters long')
+    v.minLength(2, 'Name must be at least 2 characters long'),
   ),
   email: v.pipe(v.string(), v.email('Please enter a valid email')),
   role: v.string(),
@@ -82,12 +101,12 @@ const state = reactive({
 
 const roles = ref(['Solo Developer', 'Freelancer', 'Team', 'Company']);
 
-async function onSubmit(event: FormSubmitEvent<Schema>) {
+async function onSubmit(_event: FormSubmitEvent<Schema>) {
   const result = v.safeParse(schema, state);
   if (!result.success) {
     toast.add({
       title: 'Error',
-      description: result.issues.map((issue) => issue.message).join(', '),
+      description: result.issues.map(issue => issue.message).join(', '),
       color: 'error',
     });
     return;

@@ -7,7 +7,10 @@
       <slot />
     </TerminalMain>
     <AppFooter />
+    <Analytics />
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { Analytics } from '@vercel/analytics/vue';
+</script>

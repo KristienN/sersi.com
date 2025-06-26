@@ -1,6 +1,12 @@
 <template>
-  <ContentRenderer class="prose min-w-64" v-if="docs" :value="docs" />
-  <div v-else>No docs found</div>
+  <ContentRenderer
+    v-if="docs"
+    class="prose min-w-64"
+    :value="docs"
+  />
+  <div v-else>
+    No docs found
+  </div>
 </template>
 
 <script lang="ts" setup>
@@ -8,11 +14,11 @@ definePageMeta({
   layout: 'docs',
 });
 const { data: docs } = await useAsyncData('docs', () =>
-  queryCollection('content').path('/').first()
+  queryCollection('content').path('/').first(),
 );
 
 useHead({
-  title: docs.value?.title,
+  title: docs.value?.title + ' — Sersi Docs',
   meta: [
     {
       name: 'description',

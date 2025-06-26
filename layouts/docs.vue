@@ -5,7 +5,7 @@
       <div
         class="flex flex-col lg:flex-row items-center lg:items-start justify-center"
       >
-        <DocsSidebar>
+        <DocsSidebar :navitems="navitems">
           <button
             :class="
               showNav
@@ -40,7 +40,11 @@
               class="w-full flex"
             >
               <p class="text-title text-white">{{ item.name }}</p>
-              <UIcon name="ic:round-arrow-right" size="24" class="text-white" />
+              <UIcon
+                name="ic:round-arrow-right"
+                size="24"
+                class="text-white"
+              />
             </NuxtLink>
           </div>
           <slot />

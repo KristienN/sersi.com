@@ -8,8 +8,14 @@
     <p>{{ plan.description }}</p>
     <div class="flex my-10 justify-between">
       <ul class="space-y-2">
-        <li v-for="feature in plan.features" :key="feature">
-          <Icon name="i-gg-check-o" class="text-primary" />
+        <li
+          v-for="feature in plan.features"
+          :key="feature"
+        >
+          <Icon
+            name="i-gg-check-o"
+            class="text-primary"
+          />
           {{ feature }}
         </li>
       </ul>
@@ -23,7 +29,7 @@
         <UModal
           :title="`SERSI ${plan.name}`"
           :ui="{
-            body: 'bg-slate-900 font-display',
+            body: 'font-display',
             title: 'font-display',
           }"
           :close="{
@@ -42,7 +48,7 @@
           </template>
           <template #footer>
             <div
-              class="text-center text-white flex items-center gap-2 font-display w-full"
+              class="text-center dark:text-white flex items-center gap-2 font-display w-full"
             >
               <p>Already on the waitlist?</p>
               <div class="flex items-center gap-2">
@@ -52,7 +58,10 @@
                 >
                   Join our community
                 </NuxtLink>
-                <UIcon name="i-simple-icons-discord" class="text-purple-500" />
+                <UIcon
+                  name="i-simple-icons-discord"
+                  class="text-purple-500"
+                />
               </div>
             </div>
           </template>

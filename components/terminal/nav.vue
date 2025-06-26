@@ -5,13 +5,13 @@
     <nav class="text-gray-200">
       <span class="flex items-center mx-8 md:mx-24 h-16">
         <button
-          @click="mobileMenuOpen = !mobileMenuOpen"
           class="lg:hidden"
           :class="
             mobileMenuOpen
               ? 'bg-primary rounded-l-full flex items-center justify-center size-12 mr-0'
               : 'flex items-center justify-center size-12'
           "
+          @click="mobileMenuOpen = !mobileMenuOpen"
         >
           <Icon
             v-if="!mobileMenuOpen"
@@ -27,7 +27,11 @@
           />
         </button>
         <div class="hidden lg:block mr-10">
-          <Icon name="gala:menu-left" size="30" class="text-gray-400" />
+          <Icon
+            name="gala:menu-left"
+            size="30"
+            class="text-gray-400"
+          />
         </div>
         <ul
           class="hidden lg:flex items-center justify-center h-full list-none space-y-0 mb-0"
@@ -62,8 +66,7 @@
               :key="item.id"
               :to="item.path"
               class="text-xs md:text-lg hover:underline"
-              >{{ item.name }}</NuxtLink
-            >
+            >{{ item.name }}</NuxtLink>
           </div>
           <div
             v-if="mobileMenuOpen"
@@ -74,18 +77,19 @@
         </div>
       </span>
     </nav>
-    <NuxtLink to="/help" class="hidden lg:block"
-      ><button
-        :class="
-          helpSelected
-            ? 'text-lg text-black bg-amber-600 border-2 rounded-full px-6 py-1 mr-12 hover:text-orange-200 hover:border-orange-200'
-            : 'text-lg text-orange-400 border-2 rounded-full px-6 py-1 mr-12 hover:text-orange-200 hover:border-orange-200'
-        "
-        @click="helpSelected = true"
-      >
-        help
-      </button></NuxtLink
+    <NuxtLink
+      to="/help"
+      class="hidden lg:block"
+    ><button
+      :class="
+        helpSelected
+          ? 'text-lg text-black bg-amber-600 border-2 rounded-full px-6 py-1 mr-12 hover:text-orange-200 hover:border-orange-200'
+          : 'text-lg text-orange-400 border-2 rounded-full px-6 py-1 mr-12 hover:text-orange-200 hover:border-orange-200'
+      "
+      @click="helpSelected = true"
     >
+      help
+    </button></NuxtLink>
   </div>
 </template>
 
@@ -101,13 +105,16 @@ const route = useRoute();
 if (route.path === '/') {
   selectedId.value = 1;
   helpSelected.value = false;
-} else if (route.path === '/docs') {
+}
+else if (route.path === '/docs') {
   selectedId.value = 2;
   helpSelected.value = false;
-} else if (route.path === '/pro') {
+}
+else if (route.path === '/pro') {
   selectedId.value = 3;
   helpSelected.value = false;
-} else if (route.path === '/help') {
+}
+else if (route.path === '/help') {
   helpSelected.value = true;
   selectedId.value = 0;
 }
